@@ -1,0 +1,28 @@
+#include<avr/io.h>
+#include<avr/delay.h>
+
+void main(void)
+{
+  char i, val;
+
+  DDRB = 0xF0;
+  DDRD = 0XF0;
+  DDRG = 0X0F;
+
+  PORTG = 0b00001000;
+  PORTB = 0X0;
+  PORTD = 0X0;
+
+while(1)
+{
+     val = 0b00000001;
+
+	 for(i=0; i<8; i++)
+	 {
+	    PORTD = (val & 0x0F) << 4;
+		PORTB = (val & 0xF0);
+		_delay_ms(500);
+		val = val << 1;
+    }
+}
+}
